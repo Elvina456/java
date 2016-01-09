@@ -6,9 +6,12 @@
 package com.mycompany.happy_new_year;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -16,50 +19,62 @@ import java.util.Scanner;
  */
 public class MyFile {
 
-    static boolean flag;
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("Введите адрес для поиска: "); //   c:\\
         String direction = in.nextLine();
         find(direction);
-        matches();
-        save();
 
     }
 
     private static void find(String direction) {
-
-        String list[] = new File("c:\\").list();
-        for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
+        Map<String, Integer> all_files = new HashMap<>();
+        String list[] = new File("c:\\").list(); //String list[] = new File(direction).list();
+        for (int i = 0; i < list.length; i++) { // поиск совпадений
+            for (int j = 0; j < list.length; j++) {
+                if (list[i].equals(list[j])) {
+                    int number = 0;
+                    number++;
+                    all_files.put(list[i], number);
+                    break;
+                } else {
+                    all_files.put(list[i], 0);
+                    break;
+                }
+            }
         }
-        // Map<String, Integer> all_files = new HashMap<>();
-        //  File f = new File(direction);
-        // all_files.put = f.list();     //список файлов в текущей папке помещаем в лист
-//        System.out.println(f.list());
-//        for (String file : list) {      //проверка на совпадение по адресу 
-//            if (name.equals(file)) {
-//                int i = 0;
-//                i++;
-//                flag = true;
-//                System.out.println(name + "- " + i); //запись в новый файл!!!
-//                break;
-//            } else {
-//                flag = false;
-//                System.out.println("No ");
-//                break;
-//            }
-//         //     String fullname = file +"\\" name; // поиск по дериктории
-//         //    func(fullname, "extensions"); // рекурсивный вызов функции
-//        }
+        
+        // СОРТИРОВКА ПО ЗНАЧЕНИЮ (ФАЙЛ СОРТ)
+        
+        // Получаем набор элементов
+        Set<Map.Entry<String, Integer>> set = all_files.entrySet();
+        // Отобразим набор
+        for (Map.Entry<String, Integer> me : set) {
+            System.out.print(me.getKey() + "- ");
+            System.out.println(me.getValue());
+        }
+        
+        
+        // ЗАПИСЬ В ФАЙЛ
+       // save("f",Entry);
     }
 
-    private static void matches() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private static void save(String fileName, String text) {
+        File file = new File(fileName);
 
-    private static void save() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            //проверяем, что если файл не существует то создаем его
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+            try {
+                out.print(text);
+            } finally {
+                out.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
