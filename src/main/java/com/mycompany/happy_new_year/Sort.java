@@ -25,7 +25,11 @@ public class Sort {
         Map<String, Integer> sortedMap = new TreeMap<>(new Comparator<String>() {
             @Override
             public int compare(String lhs, String rhs) {
-                return map.get(lhs).compareTo(map.get(rhs));
+                if (map.get(lhs) < map.get(rhs)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
             }
         });
         sortedMap.putAll(map);

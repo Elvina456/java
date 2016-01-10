@@ -8,7 +8,9 @@ package com.mycompany.happy_new_year;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -17,7 +19,7 @@ import java.util.Set;
  *
  * @MaLVin
  */
-public class MyFile {
+public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -29,7 +31,7 @@ public class MyFile {
 
     private static void find(String direction) {
         Map<String, Integer> all_files = new HashMap<>();
-        String list[] = new File("c:\\").list(); //String list[] = new File(direction).list();
+        String list[] = new File(direction).list();
         for (int i = 0; i < list.length; i++) { // поиск совпадений
             for (int j = 0; j < list.length; j++) {
                 if (list[i].equals(list[j])) {
