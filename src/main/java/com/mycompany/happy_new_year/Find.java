@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
@@ -34,7 +33,7 @@ public class Find {
             all_direction.add(folderName);
             return all_direction;
         }).forEach((all_direction) -> {
-            System.out.println("директории: " + all_direction);
+//            System.out.println("директории: " + all_direction);
             // folder = folder + folderName + "\\";
             // find(folder);
         });
@@ -42,7 +41,7 @@ public class Find {
             files.add((String) fileName);
         });
         // Совпадения
-        System.out.println("Все файлы: " + files);
+     //   System.out.println("Все файлы: " + files);
         String[] myArray = files.toArray(new String[files.size()]);
         math(myArray);
     }
@@ -63,13 +62,6 @@ public class Find {
                 }
             }
         }
-        Set<Map.Entry<String, Integer>> set = all_files.entrySet();
-        // Отобразим набор
-        set.stream().map((me) -> {
-            System.out.print(me.getKey() + "- ");
-            return me;
-        }).forEach((me) -> {
-            System.out.println(me.getValue());
-        });
+        Sort.sort(all_files);
     }
 }
