@@ -41,7 +41,6 @@ public class Find {
             files.add((String) fileName);
         });
         // Совпадения
-     //   System.out.println("Все файлы: " + files);
         String[] myArray = files.toArray(new String[files.size()]);
         math(myArray);
     }

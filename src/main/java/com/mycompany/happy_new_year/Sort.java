@@ -5,6 +5,7 @@
  */
 package com.mycompany.happy_new_year;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,8 +15,7 @@ import java.util.TreeMap;
  */
 public class Sort {
 
-//    public static void main(String[] args) {
-    public static void sort(Map<String, Integer> map) {
+    public static void sort(Map<String, Integer> map) throws IOException {
         Map<String, Integer> sortedMap = new TreeMap<>((String lhs, String rhs) -> {
             if (map.get(lhs) < map.get(rhs)) {
                 return 1;
@@ -28,5 +28,9 @@ public class Sort {
         sortedMap.entrySet().stream().forEach((entry) -> {
             System.out.println(String.format("%s = %s", entry.getKey(), entry.getValue()));
         });
+        
+        Save save = new Save(); 
+			save.write(sortedMap);	
+    
     }
 }

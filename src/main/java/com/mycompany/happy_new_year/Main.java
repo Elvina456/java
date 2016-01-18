@@ -24,21 +24,4 @@ public class Main {
         f.find(folder);
 
     }
-
-    private static void save(String fileName, String text) {
-        File file = new File(fileName);
-
-        try {
-            //проверяем, что если файл не существует то создаем его
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            try (PrintWriter out = new PrintWriter(file.getAbsoluteFile())) {
-                out.print(text);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }
